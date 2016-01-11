@@ -7,9 +7,7 @@ import com.bid.utility.DatePattern;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,10 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by skupunarapu on 1/8/2016.
  */
 public class BidService {
-
-    private static final int STORING_TIME_AMOUNT = 2;
-    private static final int STORING_TIME_UNIT= GregorianCalendar.MINUTE;
-
 
     private Long nextId;
     private Map<Long, Bid> bidMap;
@@ -38,7 +32,7 @@ public class BidService {
         }
         System.out.println("Creating auction no. " + id);
 
-        Date closingTime = null;
+        Date closingTime;
         try {
             SimpleDateFormat sdf = DatePattern.getSdf();
             closingTime = sdf.parse(closingTimeString);
@@ -58,31 +52,6 @@ public class BidService {
         return id;
     }
 
-    public String getSdfString(){
-        return DatePattern.SDF_PATTERN;
-    }
-
-    public String getAuctionListString(){
-        String s = String.format("%-15s%-20s%-20s%-20s%-20s\n", "ID", "Title",
-                "Price (in GDB)", "Closing Time", "Open?");
-        s += "-------------------------------------------------------------------------------\n";
-
-        Calendar cal = new GregorianCalendar();
-        for (Map.Entry<Long, Bid> e: bidMap.entrySet()) {
-            Long key = e.getKey();
-            Bid a = e.getValue();
-            cal.setTime(a.getClosingTime());
-            cal.add(STORING_TIME_UNIT, STORING_TIME_AMOUNT);
-            if ((new GregorianCalendar().after(cal))) {
-                System.out.println("Removing auction " + key);
-                bidMap.remove(key);
-                continue;
-            }
-            s += a.getShortDescription() + "\n";
-        }
-        return s;
-    }
-
     public boolean bid(User bidder, long auctionId, double bid){
         Bid a = bidMap.get(auctionId);
         if (a == null) {
@@ -92,11 +61,4 @@ public class BidService {
         a.bid(bidder, bid);
         return true;
     }
-
-//    public String getAuctionDetails(long auctionId){
-//        Bid a = bidMap.get(auctionId);
-//        if (a == null)
-//            return null;
-//        return a.getFullDescription();
-//    }
 }

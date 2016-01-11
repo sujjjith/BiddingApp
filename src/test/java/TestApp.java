@@ -15,8 +15,8 @@ import static org.junit.Assert.assertTrue;
 public class TestApp {
 
     private BidService bidService;
-    private static final String[] CLOSING_TIMES = {"2016-01-08T12:34", "2016-01-09T16:34",
-            "2016-01-10T11:33", "2016-12-25T13:34", "2016-03-02T20:34"};
+    private static final String[] CLOSING_TIMES = {"2016-01-10T12:34", "2016-01-12T16:34",
+            "2016-01-14T11:33", "2016-12-25T13:34", "2016-03-02T20:34"};
 
     private static final int USER_LIST_SIZE = 2;
     private static final int CREATE_TIMES = 2;

@@ -5,7 +5,6 @@ import com.bid.data.User;
 import com.bid.timer.EndTimer;
 import com.bid.utility.DatePattern;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,21 +64,6 @@ public class Bid {
         return String.format("%-15d%-20s%-20.2f%-20s%-10s", id, item.getItemName(),
                 item.getItemValue(), closingTimeString, Boolean.toString(isOpen));
     }
-
-//    public synchronized String getFullDescription() {
-//        String s = String.format("ID: %d\n", id);
-//        s += String.format("Title: %s\n", item.getItemName());
-//        s += String.format("Description: %s\n", item.getItemDescription());
-//        s += String.format("Current value: %.2fGBP\n", item.getItemValue());
-//        s += String.format("Number of bidders so far: %d\n", biddersMap.size());
-//        SimpleDateFormat sdf = DatePattern.getSdf();
-//        s += String.format("Closing Time (UK time): %s\n\n", sdf.format(closingTime));
-//        s += "The auction is " + ((isOpen)? "open": "closed") + ".\n";
-//        if (!isOpen) {
-//            s += getResult();
-//        }
-//        return s;
-//    }
 
     private String getResult() {
         if (highestBidder == null)
